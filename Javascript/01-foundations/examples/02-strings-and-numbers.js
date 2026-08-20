@@ -43,52 +43,86 @@
 
 
 // String
-const string = "The revolution will not be televised.";
-console.log(string);
+// const string = "The revolution will not be televised.";
+// console.log(string);
 // const badString1 = This is a test;
 // const badString2 = 'This is a test;
 // const badString3 = This is a test';
-const badString = string;
-console.log(badString);
-const single = 'Single quotes';
-const double = "Double quotes";
-const backtick = `Backtick`;
+// const badString = string;
+// console.log(badString);
+// const single = 'Single quotes';
+// const double = "Double quotes";
+// const backtick = `Backtick`;
 
-console.log(single);
-console.log(double);
-console.log(backtick);
-// const badQuotes = 'This is not allowed!";
+// console.log(single);
+// console.log(double);
+// console.log(backtick);
+// // const badQuotes = 'This is not allowed!";
 
-const greeting3 = "Howdy";
-const name3 = "Ramesh";
-console.log(`${greeting3}, ${name3}`); // "Howdy, Ramesh"
+// const greeting3 = "Howdy";
+// const name3 = "Ramesh";
+// console.log(`${greeting3}, ${name3}`); // "Howdy, Ramesh"
 
-const song = "Fight the Youth";
-const score = 9;
-const highestScore = 10;
-const output = `I like the song ${song}. I gave it a score of ${
-  (score / highestScore) * 100
-}%.`;
-console.log(output); // "I like the song Fight the Youth. I gave it a score of 90%."
+// const song = "Fight the Youth";
+// const score = 9;
+// const highestScore = 10;
+// const output = `I like the song ${song}. I gave it a score of ${
+//   (score / highestScore) * 100
+// }%.`;
+// console.log(output); // "I like the song Fight the Youth. I gave it a score of 90%."
 
 // Quotes in strings
 // const badQuotes = "She said "I think so!""; // SyntaxError: Unexpected identifier 'I'
-const goodQuotes1 = 'She said "I think so!"';
-const goodQuotes2 = `She said "I'm not going in there!"`;
-console.log(goodQuotes1);
-console.log(goodQuotes2);
-const bigmouth = 'I\'ve got no right to take my place…';
-console.log(bigmouth);
+// const goodQuotes1 = 'She said "I think so!"';
+// const goodQuotes2 = `She said "I'm not going in there!"`;
+// console.log(goodQuotes1);
+// console.log(goodQuotes2);
+// const bigmouth = 'I\'ve got no right to take my place…';
+// console.log(bigmouth);
 
-// Numbers vs Strings
-const coolBandName = "Front ";
-const number = 242;
-console.log(coolBandName + number); // "Front 242"
+// // Numbers vs Strings
+// const coolBandName = "Front ";
+// const number = 242;
+// console.log(coolBandName + number); // "Front 242"
 
-const myString = "123";
-const myNum = Number(myString);
-console.log(typeof myNum); // number
+// const myString = "123";
+// const myNum = Number(myString);
+// console.log(typeof myNum); // number
 
-const myNum2 = 123;
-const myString2 = String(myNum2);
-console.log(typeof myString2); // string
+// const myNum2 = 123;
+// const myString2 = String(myNum2);
+// console.log(typeof myString2); // string
+
+
+
+/* Practice Questions */
+// Q1. What is the difference between 5 and "5"?
+// 5 is a number and "5" is a string.
+
+// Q2.
+console.log("5" + 2); // 52
+console.log("5" - 2); // 3
+console.log(Number("5") + 2); // 7
+console.log(Number("hello")); // NaN
+
+// Q3.What does NaN mean, and how can you reliably check whether a value is NaN?
+// NaN means Not-a-Number. we use Number() to check if a value is NaN or not.
+
+// Q4.
+console.log(5 === "5"); // false
+console.log(5 == "5"); // true; // because not a strict check
+console.log(5 !== "5"); // true
+
+// Q5. 
+// 17 % 5; // 2
+// 20 % 2; // 0
+
+// Q6.
+console.log(2 + 3 * 4); // 14
+console.log((2 + 3) * 4); // 20
+
+// Q7. 
+const language = "JavaScript";
+console.log(language.length); // 10
+console.log(language.toUpperCase()); // "JAVASCRIPT"
+console.log(language.slice(0, 4)); // "Java"

@@ -66,3 +66,23 @@
 
 //   final-expression
 // }
+
+
+/* Practice Questions */
+// Q1.
+// for (let number = 1; number <= 5; number += 1) {
+//   console.log(number);
+// }
+
+// Q2. Write a loop that calculates the total of:
+const prices = [100, 250, 50, 400];
+
+
+// Q8.
+// for (let number = 1; number <= 5; number += 1) {
+//   if (number === 3) {
+//     continue; // 3 won't print
+//   }
+
+//   console.log(number);
+// }

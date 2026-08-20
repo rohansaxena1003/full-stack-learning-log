@@ -107,3 +107,47 @@
 
 /* Return values */
 // Return values are just what they sound like — the values that a function returns when it completes. You've already met return values several times, although you may not have thought about them explicitly.
+
+
+
+/* Practice Questions */
+// Q1.
+// function greet(name) {
+//   console.log(`Hello, ${name}`);
+// }
+
+// const message = greet("Rohan");
+// console.log(message); // undefined
+
+/* Q2 Rewrite this function declaration as an arrow function:
+function calculateTax(amount) {
+  return amount * 0.18;
+} 
+*/
+
+// const amt = 13;
+// const tax = amt => amt*2;
+// console.log(tax(amt));
+
+// let a = 4, b = 5;
+// const add = (a, b) => a + b; // Automatically returns a + b
+// console.log(add());
+
+// Q3. Predict both results:
+// function calculateTax(amount, rate = 0.18) {
+//   return amount * rate;
+// }
+
+// console.log(calculateTax(1000)); // 180
+// console.log(calculateTax(1000, 0.05)); //50
+
+//Q4.  Explain local and global scope. Can the second log access subtotal?
+// const taxRate = 0.18;
+
+// function calculateFinalPrice(price) {
+//   const subtotal = price;
+//   return subtotal + subtotal * taxRate;
+// }
+
+// console.log(calculateFinalPrice(100)); // 118
+// console.log(subtotal); // error
