@@ -251,11 +251,14 @@ The find() method reads the length property of this and then accesses each prope
 // console.log(Array.prototype.find.call(arrayLike, (x) => !Number.isInteger(x)));
 // 7.3
 
-/* ### some()
-The some() method of Array instances returns true if it finds an element in the array that satisfies the provided testing function. 
-Otherwise, it returns false. */
-
-// const arr31 = [1,3,4,5,7];
-// const func31 = e => e%2 === 0;
-
-// console.log(arr31.some(func31));
+/*
+| Requirement | Method |
+|---|---|
+| Transform every element | `map()` |
+| Keep matching elements | `filter()` |
+| Get the first match | `find()` |
+| Check whether one matches | `some()` |
+| Check whether all match | `every()` |
+| Produce one accumulated result | `reduce()` |
+| Perform a side effect | `forEach()` |
+*/
