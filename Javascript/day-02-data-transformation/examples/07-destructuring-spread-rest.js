@@ -15,7 +15,7 @@ It can be used in locations that receive data (such as the left-hand side of an 
 
 
 /* SYNTAX */
-let arr4 = [1,3,4,5,56,,6];
+// let arr4 = [1,3,4,5,56,,6];
 // const [a, b] = array;
 
 // const [a, , b] = arr4;
@@ -152,7 +152,59 @@ The rest property of array destructuring can be another array or object binding 
 // console.log(a, b, c, d, e, f); // 1 2 3 4 5 6
 
 /* Assigning to new variable names and providing default values */
-const { a: aa = 10, b: bb = 5 } = { a: 3 };
+// const { a: aa = 10, b: bb = 5 } = { a: 3 };
 
-console.log(aa); // 3
-console.log(bb); // 5
+// console.log(aa); // 3
+// console.log(bb); // 5
+
+/* ### Spread
+Spread syntax looks exactly like rest syntax. In a way, spread syntax is the opposite of rest syntax. 
+Spread syntax "expands" an array into its elements, while rest syntax collects multiple elements and "condenses" them into a single element. 
+*/
+
+// function func55(x,y,z) {
+//   return x + y + z;
+// }
+
+// const arr55 = [1,3,4];
+// console.log(func55(arr55)); // 1,3,4undefinedundefined
+// console.log(func55(...arr55)); // 8
+// console.log(func55.apply(null, arr55)); // 8
+// console.log(arr4);
+
+/* arrays can be spread into objects. 
+Many objects are not iterable, including all plain objects that lack a Symbol.iterator method
+All primitives can be spread in objects. Only strings have enumerable own properties, and spreading anything else doesn't create properties on the new object.
+*/
+// const arr56 = [4,6,2];
+// const obj56 = {...arr56};
+// console.log(obj56); // { '0': 4, '1': 6, '2': 2 }
+
+// const obj57 = { key1: "value1" };
+// const arr57 = [...obj57]; // TypeError: obj57 is not iterable
+
+// const obj58 = { ...true, ..."test", ...10 };
+// console.log(obj58);
+// // { '0': 't', '1': 'e', '2': 's', '3': 't' }
+// const obj59 = { ...true}
+// console.log(obj59); // {}
+// const obj60 = { ...10}
+// console.log(obj60); // {}
+
+/* Spread in function calls */
+/* Replace apply()
+It is common to use Function.prototype.apply() in cases where you want to use the elements of an array as arguments to a function.
+*/
+function func61(x,y,z) {
+  return x+y+z;
+};
+const args61 = [5,2,6];
+const var61 = func61.apply(null,args61);
+console.log(var61); // 13
+const var62 = func61(...args61);
+console.log(var62); // 13
+function func62(v, w, x, y, z) {
+  console.log(v,w,x,y,z);
+}
+const args62 = [0, 1];
+func62(-1, ...args62, 2, ...[3]);
