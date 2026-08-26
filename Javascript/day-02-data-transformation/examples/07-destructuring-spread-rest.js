@@ -195,16 +195,128 @@ All primitives can be spread in objects. Only strings have enumerable own proper
 /* Replace apply()
 It is common to use Function.prototype.apply() in cases where you want to use the elements of an array as arguments to a function.
 */
-function func61(x,y,z) {
-  return x+y+z;
-};
-const args61 = [5,2,6];
-const var61 = func61.apply(null,args61);
-console.log(var61); // 13
-const var62 = func61(...args61);
-console.log(var62); // 13
-function func62(v, w, x, y, z) {
-  console.log(v,w,x,y,z);
+// function func61(x,y,z) {
+//   return x+y+z;
+// };
+// const args61 = [5,2,6];
+// const var61 = func61.apply(null,args61);
+// console.log(var61); // 13
+// const var62 = func61(...args61);
+// console.log(var62); // 13
+// function func62(v, w, x, y, z) {
+//   console.log(v,w,x,y,z);
+// }
+// const args62 = [0, 1];
+// func62(-1, ...args62, 2, ...[3]); // -1 0 1 2 3
+
+/* Copying an array
+You can use spread syntax to make a shallow copy of an array. 
+Each array element retains its identity without getting copied. */
+// const arr71 = [1, 2, 3];
+// const arr72 = [...arr71]; // like arr.slice()
+
+// arr72.push(4);
+// console.log(arr71);// [ 1, 2, 3 ]
+// console.log(arr72);// [ 1, 2, 3, 4 ]
+
+/* A better way to concatenate arrays
+Array.prototype.concat() is often used to concatenate an array to the end of an existing array.
+Without spread syntax, this is done as:
+*/
+// let arr73 = [0, 1, 2];
+// const arr74 = [3, 4, 5];
+// // Append all items from arr74 onto arr73
+// arr73 = arr73.concat(arr74); 
+// console.log(arr73); // [ 0, 1, 2, 3, 4, 5 ]
+// console.log(arr74); // [ 3, 4, 5 ]
+
+// let arr75 = [4,5,9];
+// let arr76 = [2,5,1];
+// arr75 = [...arr75, ...arr76];
+// console.log(arr75); // [ 4, 5, 9, 2, 5, 1 ]
+// console.log(arr76); // [ 2, 5, 1 ]
+
+/* Array.prototype.unshift() is often used to insert an array of values at the start of an existing array. 
+Without spread syntax, this is done as:
+*/
+// const arr77 = [3,2,5];
+// arr77.unshift(7);
+// console.log(arr77); // [ 7, 3, 2, 5 ]
+// arr77.unshift(12,43,55);
+// console.log(arr77); // [ 12, 43, 55, 7, 3,  2,  5 ]
+// const arr78 = [8,7,0];
+// Array.prototype.unshift.apply(arr77, arr78);
+// console.log(arr77); // [ 8, 7, 0, 12, 43, 55, 7, 3,  2,  5 ]
+// console.log(arr78); // [ 8, 7, 0 ]
+
+/* Conditionally adding values to an array */
+// const isSummer = false;
+// const fruits = ["apple", "banana", ...(isSummer ? ["watermelon"] : [])]; 
+// console.log(fruits); // [ 'apple', 'banana' ]
+// const fruits2 = ["apple", "banana", isSummer ? "watermelon" : undefined];
+// console.log(fruits2);// [ 'apple', 'banana', undefined ]
+// ['apple', 'banana', undefined]
+
+
+/* ### Spread in object literals */
+/* Copying and merging objects
+You can use spread syntax to merge multiple objects into one new object. */
+// const obj1 = { foo: "bar", x: 42 };
+// const obj2 = { bar: "baz", y: 13 };
+
+// const mergedObj = { ...obj1, ...obj2 };
+// console.log(mergedObj); // { foo: "bar", x: 42, bar: "baz", y: 13 }
+
+/* A single spread creates a shallow copy of the original object (but without non-enumerable properties and without copying the prototype), similar to copying an array. */
+// const obj81 = { foo: "bar", x: 42 };
+// const clonedObj = { ...obj81 };
+// console.log(clonedObj); // { foo: "bar", x: 42 }
+
+/* Overriding properties
+When one object is spread into another object, or when multiple objects are spread into one object, and properties with identical names are encountered, 
+the property takes the last value assigned while remaining in the position it was originally set. */
+// const obj91 = { foo: "bar", x: 42 };
+// const obj92 = { foo: "baz", y: 13 };
+
+// const mergedObj5 = { x: 41, ...obj91, ...obj92, y: 9 }; 
+// console.log(mergedObj5); // { x: 42, foo: "baz", y: 9 }
+
+
+/* Conditionally adding properties to an object
+You can make an element present or absent in an object literal, depending on a condition, using a conditional operator. 
+*/
+// const isSummer = false;
+// const fruits44 = {
+//   apple: 10,
+//   banana: 5,
+//   ...(isSummer ? { watermelon: 30 } : {}),
+// };
+// console.log(fruits44);// { apple: 10, banana: 5 }
+
+/* The case where the condition is false is an empty object, so that nothing gets spread into the final object. Note that this is different from the following: */
+// const fruits45 = {
+//   apple: 10,
+//   banana: 5,
+//   watermelon: isSummer ? 30 : undefined,
+// };
+// console.log(fruits45);// { apple: 10, banana: 5, watermelon: undefined }
+
+
+
+
+
+
+/* ### Rest */
+function sum(...theArgs) {
+  let total = 0;
+  for (const arg of theArgs) {
+    total += arg;
+  }
+  return total;
 }
-const args62 = [0, 1];
-func62(-1, ...args62, 2, ...[3]);
+
+console.log(sum(1, 2, 3));
+// Expected output: 6
+
+console.log(sum(1, 2, 3, 4));
+// Expected output: 10
