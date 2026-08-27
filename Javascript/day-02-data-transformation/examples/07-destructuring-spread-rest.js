@@ -110,7 +110,7 @@ It is not used if the property has value null.
 /* Examples
 Array destructuring */
 
-/*Basic variable assignment */
+/* Basic variable assignment */
 // const foo = ["one", "two", "three"];
 
 // const [red, yellow, green] = foo;
@@ -307,16 +307,114 @@ You can make an element present or absent in an object literal, depending on a c
 
 
 /* ### Rest */
-function sum(...theArgs) {
-  let total = 0;
-  for (const arg of theArgs) {
-    total += arg;
-  }
-  return total;
-}
+// function sum(...theArgs) {
+//   let total = 0;
+//   for (const arg of theArgs) {
+//     total += arg;
+//   }
+//   return total;
+// }
 
-console.log(sum(1, 2, 3));
-// Expected output: 6
+// console.log(sum(1, 2, 3));
+// // Expected output: 6
 
-console.log(sum(1, 2, 3, 4));
+// console.log(sum(1, 2, 3, 4));
 // Expected output: 10
+
+
+/* ----------------------------------------------------------*/
+/* ###Optional Chaining */
+/* The optional chaining (?.) operator accesses an object's property or calls a function. 
+If the object accessed or function called using this operator is undefined or null, the expression short circuits and evaluates to undefined instead of throwing an error.
+*/
+// const adventurer = {
+//   name: "Alice",
+//   cat: {
+//     name: "Dinah",
+//   },
+// };
+
+// const dogName = adventurer.dog?.name;
+// console.log(dogName); // undefined
+
+// console.log(adventurer.someNonExistentMethod?.()); // undefined
+
+/* Syntax 
+obj?.prop
+obj?.[expr]
+func?.(args)
+*/
+
+/* Optional chaining with expressions
+You can also use the optional chaining operator with bracket notation, which allows passing an expression as the property name:
+const propName = "x";
+const nestedProp = obj?.[propName];
+*/
+// function printMagicIndex(arr) {
+//   console.log(arr?.[42]);
+// }
+
+// printMagicIndex([0, 1, 2, 3, 4, 5]); // undefined
+// printMagicIndex(); // undefined; if not using ?., this would throw an error: "Cannot read properties of undefined (reading '42')"
+
+/* Invalid optional chaining
+It is invalid to try to assign to the result of an optional chaining expression: */
+// const object = {};
+// object?.property = 1; // SyntaxError: Invalid left-hand side in assignment
+
+/* Template literal tags cannot be an optional chain (see SyntaxError: tagged template cannot be used with optional chain): */
+// String?.raw`Hello, world!`;
+// String.raw?.`Hello, world!`; // SyntaxError: Invalid tagged template on optional chain
+
+/* The constructor of new expressions cannot be an optional chain: */
+// new Intl?.DateTimeFormat(); // SyntaxError: Invalid optional chain from new expression
+// new Map?.(); // SyntaxError: Invalid optional chain from new expression
+
+/* Short-circuiting
+When using optional chaining with expressions, if the left operand is null or undefined, the expression will not be evaluated. 
+For instance: */
+// const potentiallyNullObj = null;
+// let x = 0;
+// const prop = potentiallyNullObj?.[x++];
+
+// console.log(x); // 0 as x was not incremented
+// console.log(prop); // undefined
+
+/* Examples */
+// const myMap = new Map();
+// myMap.set("JS", { name: "Josh", desc: "I maintain things" });
+
+// const nameBar = myMap.get("CSS")?.name;
+// console.log(nameBar); // undefined
+
+
+/* Practice */
+/* Adding an element without push() */
+// let arr = [1,3,4,6];
+// const ele = 8;
+// arr = [...arr, ele];
+// console.log(arr); // [ 1, 3, 4, 6, 8 ]
+
+/* Remove an element without splice() */
+// let arr = [4,3,6,22];
+// arr.shift();
+// console.log(arr); // [ 3, 6, 22 ]
+
+/* Updating one object inside an array without changing the original array. */
+// const arr = [
+//   {
+//     one: 3,
+//     four: 5
+//   },
+//   {
+//     six: 7,
+//     eoght: 9,
+//     ten: 'eleven'
+//   }
+// ];
+// console.log(arr); // [ { one: 3, four: 5 }, { six: 7, eoght: 9, ten: 'eleven' } ]
+// arr[0].four = 'fourth';
+// console.log(arr); // [ { one: 3, four: 'fourth' }, { six: 7, eoght: 9, ten: 'eleven' } ]
+
+
+/* Updating an object property using spread. */
