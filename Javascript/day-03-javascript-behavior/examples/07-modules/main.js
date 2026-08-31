@@ -63,6 +63,6 @@ import { createIdGenerator } from "./user.js";
 
 const generateId = createIdGenerator();
 console.log(generateId);
-console.log(generateId());
-console.log(generateId());
-console.log(generateId());
+console.log(generateId()); // 1
+console.log(generateId()); // 2
+console.log(generateId()); // 3
