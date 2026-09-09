@@ -1,0 +1,36 @@
+body {
+    font-family: Arial, sans-serif;
+}
+
+.container {
+    width: 500px;
+    margin: 40px auto;
+}
+
+.highlighted {
+    color: palevioletred;
+}
+
+.status {
+    padding: 10px;
+}
+
+.ready {
+    color: darkgreen;
+    background-color: lightgreen;
+}
+
+.task {
+    margin: 8px 0;
+}
+
+.completed {
+    color: gray;
+    text-decoration: line-through;
+}
+
+.task-label {
+    margin-left: 10px;
+    color: darkblue;
+    font-size: 12px;
+}
