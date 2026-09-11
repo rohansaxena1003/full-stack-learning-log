@@ -1,0 +1,51 @@
+body {
+    font-family: Arial, sans-serif;
+}
+
+.container {
+    width: 450px;
+    margin: 40px auto;
+}
+
+.field {
+    margin-bottom: 16px;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.checkbox-field label {
+    display: inline;
+}
+
+input,
+select {
+    box-sizing: border-box;
+    width: 100%;
+    padding: 8px;
+}
+
+input[type="checkbox"] {
+    width: auto;
+}
+
+button {
+    padding: 8px 14px;
+}
+
+.error {
+    min-height: 18px;
+    margin: 4px 0;
+    color: darkred;
+    font-size: 14px;
+}
+
+.invalid {
+    border: 2px solid darkred;
+}
+
+.success {
+    color: darkgreen;
+}
