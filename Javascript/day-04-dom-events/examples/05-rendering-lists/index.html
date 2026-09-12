@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Rendering Lists</title>
+
+    <link rel="stylesheet" href="styles.css">
+    <script src="script.js" defer></script>
+</head>
+
+<body>
+    <main class="container">
+        <h1>Task Renderer</h1>
+
+        <form id="task-form">
+            <label for="task-title">
+                New task:
+            </label>
+
+            <input
+                id="task-title"
+                name="title"
+                type="text"
+                autocomplete="off"
+                required
+            >
+
+            <button type="submit">
+                Add task
+            </button>
+        </form>
+
+        <div class="filters">
+            <button
+                type="button"
+                data-filter="all"
+                class="selected"
+            >
+                All
+            </button>
+
+            <button
+                type="button"
+                data-filter="active"
+            >
+                Active
+            </button>
+
+            <button
+                type="button"
+                data-filter="completed"
+            >
+                Completed
+            </button>
+        </div>
+
+        <ul id="task-list"></ul>
+
+        <p id="remaining-count"></p>
+    </main>
+</body>
+</html>

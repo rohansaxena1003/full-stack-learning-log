@@ -1,0 +1,44 @@
+body {
+    font-family: Arial, sans-serif;
+}
+
+.container {
+    width: 600px;
+    margin: 40px auto;
+}
+
+form,
+.filters {
+    margin-bottom: 20px;
+}
+
+input,
+button {
+    padding: 8px;
+}
+
+.task {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.task-title {
+    flex: 1;
+}
+
+.completed .task-title {
+    color: gray;
+    text-decoration: line-through;
+}
+
+.selected {
+    color: white;
+    background-color: darkblue;
+}
+
+.empty-message {
+    color: gray;
+    font-style: italic;
+}
