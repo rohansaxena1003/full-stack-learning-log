@@ -35,34 +35,43 @@ let products = [
     }
 ];
 
+let availableCount = 0;
 const taskList = document.createElement("ul");
 const showAll = document.querySelector("#show-all");
 const showAvailable = document.querySelector("#show-available");
 const productList = document.querySelector("#product-list");
 const productSummary = document.querySelector("#product-summary");
 
-function createToggleStockButton() {
+
+function createToggleStockButton(p) {
   const toggleButton = document.createElement("button");
   toggleButton.classList.add("toggle");
+  toggleButton.dataset.action = "toggle"; // ex6 - 1
+  toggleButton.dataset.id = p.id; // ex6 - 2
   toggleButton.textContent = "Toggle button";
   return toggleButton;
+}
+
+function createArticle(p) {
+  const article = document.createElement("article");
+  article.textContent = `Name: ${p.name}, Price: ${p.price}, Stock available: ${p.inStock ? "YES" : "NO"}`;
+  article.dataset.id = p.id; // 3
+  return article;
 }
 
 // render();
 
 function render() {
+  
   productList.replaceChildren();
 
   products.forEach((p) => {
-    console.log(p);
-    // 1
-    const article = document.createElement("article");
-    article.textContent = `Name: ${p.name}, Price: ${p.price}, Stock available: ${p.inStock ? "YES" : "NO"}`;
-    article.dataset.id = p.id; // 3
-    const toggleStockbtn = createToggleStockButton(); // 5
+    // console.log(p);
+    const article = createArticle(p); // 1
+    const toggleStockbtn = createToggleStockButton(p); // 5
 
     // 6
-    toggleStockbtn.addEventListener("click", handleToggle);
+    // toggleStockbtn.addEventListener("click", handleToggle);
     article.append(toggleStockbtn);
     
     if(!p.inStock) {
@@ -74,15 +83,39 @@ function render() {
 }
 
 const toggleButtons = document.querySelectorAll(".toggle");
-toggleButtons.forEach( (tb) => {
-  tb.addEventListener("click", handleToggle);
-});
+
+// Exercise for topic 6
+/* Your Topic 6 exercise is to remove that individual listener.
+Instead:
+1. Give every Toggle Stock button a data-action.
+2. Give every button its product ID.
+3. Attach one listener to productList.
+4. Use event.target.closest() to find the button.
+5. Return when the click did not come from a relevant button.
+6. Read the product ID.
+7. Call your existing toggleStock() function.
+Do not rewrite the entire Product Renderer. Refactor only its event handling.
+*/
+
+// toggleButtons.forEach( (tb) => {
+//   tb.addEventListener("click", handleToggle);
+// });
+productList.addEventListener("click", handleToggle); // ex6 - 3
 
 function handleToggle(e) {
+  e.preventDefault();
+  // const currentBtn = e.target;
+  // console.log(e.target);
+  // console.log(e.target.closest(".toggle"));
+  if(e.target.dataset.action !== 'toggle') { // ex6 - 5
+    console.log("trtr");
+    return;
+  }
+
   const taskId = e.srcElement.parentElement.dataset.id;
   // console.log(e.srcElement.parentElement);
-  // console.log(taskId);
-  let availableCount = 0;
+  console.log(taskId);
+  availableCount = 0;
   products = products.map((p) =>  {
     // console.log(p);
     if(p.id == taskId) {
@@ -93,12 +126,10 @@ function handleToggle(e) {
     }
     return p;
   });
-  console.log(products);
+  // console.log(products);
 
   render(); // 7
-  if(availableCount == 0) { // 10
-    productSummary.textContent = 'No products available';
-  } 
+  displayCount(availableCount);
 }
 
 showAll.addEventListener("click", render); // 8
@@ -117,4 +148,12 @@ function displayOnlyInStock() {
   products = availableProducts;
   render();
   products = allProducts;
+}
+
+function displayCount(availableCount) {
+  if(availableCount == 0) { // 10
+    productSummary.textContent = 'No products available';
+  } else {
+    productSummary.textContent = `${availableCount} products available`;
+  }
 }
