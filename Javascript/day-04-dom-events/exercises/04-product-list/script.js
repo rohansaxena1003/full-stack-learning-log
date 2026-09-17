@@ -41,6 +41,7 @@ const showAll = document.querySelector("#show-all");
 const showAvailable = document.querySelector("#show-available");
 const productList = document.querySelector("#product-list");
 const productSummary = document.querySelector("#product-summary");
+let productDataJson = JSON.stringify(products);
 
 
 function createToggleStockButton(p) {
@@ -64,8 +65,8 @@ function createArticle(p) {
 function render() {
   
   productList.replaceChildren();
-
-  products.forEach((p) => {
+  const productData = JSON.parse(productDataJson);
+  productData.forEach((p) => {
     // console.log(p);
     const article = createArticle(p); // 1
     const toggleStockbtn = createToggleStockButton(p); // 5
@@ -116,7 +117,8 @@ function handleToggle(e) {
   // console.log(e.srcElement.parentElement);
   console.log(taskId);
   availableCount = 0;
-  products = products.map((p) =>  {
+  let allProducts = JSON.parse(productDataJson);
+  allProducts = allProducts.map((p) =>  {
     // console.log(p);
     if(p.id == taskId) {
       p.inStock = !(p.inStock);
@@ -130,6 +132,8 @@ function handleToggle(e) {
 
   render(); // 7
   displayCount(availableCount);
+  productDataJson = JSON.stringify(allProducts);
+  saveDataToLocalStorage(productDataJson);
 }
 
 showAll.addEventListener("click", render); // 8
@@ -138,16 +142,17 @@ showAll.addEventListener("click", render); // 8
 showAvailable.addEventListener("click", displayOnlyInStock);
 
 function displayOnlyInStock() {
-  const allProducts = products;
-  const availableProducts = products.filter( (p) => {
+  const allProducts = JSON.parse(productDataJson);
+  const availableProducts = allProducts.filter( (p) => {
     if(p.inStock) {
       return p;
     }
   });
   console.log(availableProducts);
-  products = availableProducts;
+  productDataJson = JSON.stringify(availableProducts);
   render();
-  products = allProducts;
+  productDataJson = JSON.stringify(allProducts);
+  saveDataToLocalStorage(productDataJson);
 }
 
 function displayCount(availableCount) {
@@ -157,3 +162,30 @@ function displayCount(availableCount) {
     productSummary.textContent = `${availableCount} products available`;
   }
 }
+
+/* Topic 7 - Part 12. Connecting storage to your renderer
+Your Topic 5 pattern was:
+Update data → render
+It now becomes:
+Update data → save → render
+At startup:
+1. Load saved data.
+2. Use initial data if no entry exists.
+3. Assign the working array.
+4. Render it.
+After a user action:
+1. Update the working array.
+2. Save the updated array.
+3. Render the new state.
+4. Warn the user if saving failed.
+Keep saving separate from rendering. Switching between “All” and “Available” does not change the products themselves, so it does not require saving them again.
+Also, load before saving. Saving the initial array unconditionally at startup would overwrite the user’s previous changes.
+*/
+
+
+
+function saveDataToLocalStorage(productDataJson) {
+  localStorage.setItem("product-data", productDataJson);
+}
+
+saveDataToLocalStorage(productDataJson);
