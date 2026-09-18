@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -8,5 +8,82 @@
 <body>
   
   <script src="./script.js"></script>
+</body>
+</html> -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Saved Study Note</title>
+    <script src="script.js" defer></script>
+</head>
+
+<body>
+    <main>
+        <h1>My study note</h1>
+
+        <form id="note-form">
+            <label for="note">What did you learn?</label>
+
+            <textarea
+                id="note"
+                name="note"
+                rows="5"
+                required
+            ></textarea>
+
+            <button type="submit">Save note</button>
+
+            <button id="remove-note" type="button">
+                Remove saved note
+            </button>
+        </form>
+
+        <p id="status" role="status"></p>
+
+        <h2>Saved preview</h2>
+        <p id="preview"></p>
+    </main>
 </body>
 </html>
