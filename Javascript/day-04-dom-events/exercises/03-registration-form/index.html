@@ -8,38 +8,38 @@
 </head>
 <body>
     <form id="task-form" novalidate>
-    <label for="title">Task title:</label>
+        <label for="title">Task title:</label>
 
-    <input
-        id="title"
-        name="title"
-        type="text"
-        required
-    >
-
-    <p id="title-error"></p>    
-
-    <label for="priority">Priority:</label>
-
-    <select id="priority" name="priority">
-        <option value="">Select priority</option>
-        <option value="low">Low</option>
-        <option value="medium">Medium</option>
-        <option value="high">High</option>
-    </select>
-
-    <p id="priority-error"></p>
-
-    <label>
         <input
-            id="important"
-            name="important"
-            type="checkbox"
+            id="title"
+            name="title"
+            type="text"
+            required
         >
-        Important task
-    </label>
 
-    <button type="submit">Add task</button>
+        <p id="title-error"></p>    
+
+        <label for="priority">Priority:</label>
+
+        <select id="priority" name="priority">
+            <option value="">Select priority</option>
+            <option value="low">Low</option>
+            <option value="medium">Medium</option>
+            <option value="high">High</option>
+        </select>
+
+        <p id="priority-error"></p>
+
+        <label>
+            <input
+                id="important"
+                name="important"
+                type="checkbox"
+            >
+            Important task
+        </label>
+
+        <button type="submit">Add task</button>
     </form>
 
 <p id="result"></p>
