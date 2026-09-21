@@ -51,7 +51,7 @@ const tasks = [
 ];
 let taskId = tasks.length + 1;
 
-const taskForm = document.querySelector("task-form");
+const taskForm = document.querySelector("#task-form");
 const filterTasks = document.querySelector("#filter-tasks");
 const showAll = document.querySelector("#show-all");
 const showActive = document.querySelector("#show-active");
@@ -76,3 +76,8 @@ function render() {
   });
 }
 render();
+
+taskForm.addEventListener("submit", (e) => {
+  e.preventDefault();
+   console.log(e);
+});
