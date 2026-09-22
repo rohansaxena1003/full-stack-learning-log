@@ -41,8 +41,9 @@ const showAll = document.querySelector("#show-all");
 const showAvailable = document.querySelector("#show-available");
 const productList = document.querySelector("#product-list");
 const productSummary = document.querySelector("#product-summary");
-let productDataJson = JSON.stringify(products);
+let productDataJson = localStorage.getItem("product-data") === null ? JSON.stringify(products) : localStorage.getItem("product-data");
 
+console.log(localStorage.getItem("tr") === null ? "a" : "b");
 
 function createToggleStockButton(p) {
   const toggleButton = document.createElement("button");
@@ -129,11 +130,11 @@ function handleToggle(e) {
     return p;
   });
   // console.log(products);
-
-  render(); // 7
-  displayCount(availableCount);
   productDataJson = JSON.stringify(allProducts);
   saveDataToLocalStorage(productDataJson);
+  render(); // 7
+  displayCount(availableCount);
+  
 }
 
 showAll.addEventListener("click", render); // 8
