@@ -52,6 +52,7 @@ const tasks = [
 let taskId = tasks.length + 1;
 
 const taskForm = document.querySelector("#task-form");
+const taskTitle = document.querySelector("#title");
 const filterTasks = document.querySelector("#filter-tasks");
 const showAll = document.querySelector("#show-all");
 const showActive = document.querySelector("#show-active");
@@ -59,14 +60,37 @@ const showCompleted = document.querySelector("#show-completed");
 const showTasks = document.querySelector("#show-tasks");
 const emptyList = document.querySelector("#empty-list");
 
+
+function createTask(task) {
+  const newTask = document.createElement("p");
+  newTask.textContent = `${task.id}. ${task.title.trim()}, taskCompleted: ${task.completed ? "YES" : "NO"}`;
+  return newTask;
+}
+
+function addTaskToggleBtn(obj) {
+  const toggleBtn = document.createElement("button");
+  toggleBtn.textContent = "Toggle Button";
+  return toggleBtn;
+}
+
+function addDeleteBtn(obj) {
+  const deleteBtn = document.createElement("button");
+  deleteBtn.textContent = "Delete task";
+  return deleteBtn;
+}
+
 function render() {
+  showTasks.replaceChildren();
   if(tasks.length === 0) {
     emptyList.textContent = "List is empty";
   }
-  tasks.forEach(task => {
-    const newTask = document.createElement("p");
-    newTask.textContent = `${task.id}. ${task.title.trim()}`;
-    if(task.completed) {
+  tasks.forEach(obj => {
+    const newTask = createTask(obj);
+    const toggleBtn = addTaskToggleBtn(obj);
+    const deleteBtn = addDeleteBtn(obj);
+    newTask.append(toggleBtn);
+    newTask.append(deleteBtn);
+    if(obj.completed) {
 
     } else {
 
@@ -79,5 +103,24 @@ render();
 
 taskForm.addEventListener("submit", (e) => {
   e.preventDefault();
-   console.log(e);
+  
+  const title = taskTitle.value.trim();
+  if(title.length === 0) {
+    emptyList.textContent = "Please enter a task";
+    console.log("Please enter a task");
+    return;
+  } 
+
+  addTask(title);
+  render();
 });
+
+function addTask(title) {
+  const newTask = {
+    id: taskId,
+    title,
+    completed: false,
+  }
+  taskId++;
+  tasks.push(newTask);
+}
