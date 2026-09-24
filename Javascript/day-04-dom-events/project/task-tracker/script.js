@@ -123,4 +123,4 @@ function addTask(title) {
   }
   taskId++;
   tasks.push(newTask);
-}
+} 
