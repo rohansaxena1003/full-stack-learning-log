@@ -63,19 +63,26 @@ const emptyList = document.querySelector("#empty-list");
 
 function createTask(task) {
   const newTask = document.createElement("p");
-  newTask.textContent = `${task.id}. ${task.title.trim()}, taskCompleted: ${task.completed ? "YES" : "NO"}`;
+  newTask.textContent = `${task.id}. ${task.title.trim()}`;
+  const taskStatus = document.createElement("p");
+
+  taskStatus.textContent = `taskCompleted: ${task.completed ? "YES" : "NO"}`;
+  newTask.append(taskStatus);
+  newTask.dataset.id = task.id;
   return newTask;
 }
 
 function addTaskToggleBtn(obj) {
   const toggleBtn = document.createElement("button");
   toggleBtn.textContent = "Toggle Button";
+  toggleBtn.dataset.action = "toggle";
   return toggleBtn;
 }
 
 function addDeleteBtn(obj) {
   const deleteBtn = document.createElement("button");
   deleteBtn.textContent = "Delete task";
+  deleteBtn.dataset.action = "delete";
   return deleteBtn;
 }
 
@@ -85,6 +92,7 @@ function render() {
     emptyList.textContent = "List is empty";
   }
   tasks.forEach(obj => {
+    // console.log(obj);
     const newTask = createTask(obj);
     const toggleBtn = addTaskToggleBtn(obj);
     const deleteBtn = addDeleteBtn(obj);
@@ -125,7 +133,16 @@ function addTask(title) {
   tasks.push(newTask);
 } 
 
-
+showTasks.addEventListener("click", (event) => {
+  console.log(event.target.parentElement);
+  const clickEventId = event.target.parentElement.dataset.id;
+  if(event.target.dataset.action === "toggle") {
+    // toggleTask(clickEventId);
+  } else if(event.target.dataset.action === "delete") {
+    // deleteTask(clickEventId);
+  }
+  console.log(event.target.parentElement.dataset.id);
+});
 
 
 
