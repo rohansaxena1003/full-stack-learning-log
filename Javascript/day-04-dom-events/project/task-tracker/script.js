@@ -59,7 +59,7 @@ const showActive = document.querySelector("#show-active");
 const showCompleted = document.querySelector("#show-completed");
 const showTasks = document.querySelector("#show-tasks");
 const emptyList = document.querySelector("#empty-list");
-
+const remainingTaskCountDisplay = document.querySelector("#remaining-task-count");
 
 function createTask(task) {
   const newTask = document.createElement("p");
@@ -107,7 +107,7 @@ function render() {
     showTasks.append(newTask);
   });
 }
-render();
+
 
 taskForm.addEventListener("submit", (e) => {
   e.preventDefault();
@@ -122,6 +122,7 @@ taskForm.addEventListener("submit", (e) => {
   addTask(title);
   render();
 });
+
 
 function addTask(title) {
   const newTask = {
@@ -146,7 +147,7 @@ showTasks.addEventListener("click", (event) => {
 
 
 
-
+render();
 
 
 
