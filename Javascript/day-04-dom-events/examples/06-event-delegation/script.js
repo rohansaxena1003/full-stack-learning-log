@@ -1,24 +1,24 @@
 // Basic bubbling example
-// const container =
-//     document.querySelector("#container");
+const container =
+    document.querySelector("#container");
 
-// container.addEventListener("click", (event) => {
-//     console.log(event.target);
-//     console.log(event.currentTarget);
-//     console.log('--------');
-// });
+container.addEventListener("click", (event) => {
+    console.log(event.target);
+    console.log(event.currentTarget);
+    console.log('--------');
+});
 
 
 // 10. A basic delegation example
-// const taskList =
-//     document.querySelector("#task-list");
+const taskList =
+    document.querySelector("#task-list");
 
-// taskList.addEventListener("click", (event) => {
-//     if (event.target.dataset.action === "delete") {
-//       // console.log(event.target.parentElement.textContent);
-//       console.log("Delete button clicked");
-//     }
-// });
+taskList.addEventListener("click", (event) => {
+    if (event.target.dataset.action === "delete") {
+      // console.log(event.target.parentElement.textContent);
+      console.log("Delete button clicked");
+    }
+});
 
 
 /* Events that do and do not bubble

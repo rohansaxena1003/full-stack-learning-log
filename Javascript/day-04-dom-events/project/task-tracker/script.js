@@ -31,7 +31,7 @@ Step	What to build	Approximate time
 1	HTML: task form, filters, list container, remaining count	15–20 min
 2	Task array and rendering, including an empty-list message	20–25 min
 3	Form submission and title validation	15–20 min
-4	Complete and delete actions using event delegation	25–35 min
+4	Complete and delete   using event delegation	25–35 min
 5	Filters and remaining active-task count	15–20 min
 6	Save and restore tasks with localStorage	20–30 min
 7	Browser testing and basic styling	15–25 min
