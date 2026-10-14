@@ -42,7 +42,7 @@ Start with Step 1: the HTML structure. You need a labelled task input, an Add bu
 
 */
 
-const tasks = [
+let tasks = [
   {
     id: 1,
     title: "Practice DOM events",
@@ -138,14 +138,30 @@ showTasks.addEventListener("click", (event) => {
   console.log(event.target.parentElement);
   const clickEventId = event.target.parentElement.dataset.id;
   if(event.target.dataset.action === "toggle") {
-    // toggleTask(clickEventId);
+    toggleTask(clickEventId);
   } else if(event.target.dataset.action === "delete") {
-    // deleteTask(clickEventId);
+    deleteTask(clickEventId);
   }
-  console.log(event.target.parentElement.dataset.id);
+  console.log(event.target);
+  render();
 });
 
+function toggleTask(id) {
+  // console.log("cc", id)
+  tasks.forEach(task => {
+    // console.log(task.id);
+    if(task.id == id) {
+      console.log(task);
+      task.completed = !task.completed;
+    }
+  });
+}
 
+function deleteTask(id) {
+  console.log("dd", id);
+  tasks = tasks.filter(task => task.id != id);
+  taskId--;
+}
 
 render();
 
