@@ -59,7 +59,7 @@ const showActive = document.querySelector("#show-active");
 const showCompleted = document.querySelector("#show-completed");
 const showTasks = document.querySelector("#show-tasks");
 const emptyList = document.querySelector("#empty-list");
-const remainingTaskCountDisplay = document.querySelector("#remaining-task-count");
+const activeTaskCountDisplay = document.querySelector("#active-task-count");
 
 function createTask(task) {
   const newTask = document.createElement("p");
@@ -86,7 +86,7 @@ function addDeleteBtn(obj) {
   return deleteBtn;
 }
 
-function render() {
+function render(tasks) {
   showTasks.replaceChildren();
   if(tasks.length === 0) {
     emptyList.textContent = "List is empty";
@@ -106,6 +106,8 @@ function render() {
 
     showTasks.append(newTask);
   });
+
+  activeTasks();
 }
 
 
@@ -120,7 +122,7 @@ taskForm.addEventListener("submit", (e) => {
   } 
 
   addTask(title);
-  render();
+  render(tasks);
 });
 
 
@@ -143,7 +145,7 @@ showTasks.addEventListener("click", (event) => {
     deleteTask(clickEventId);
   }
   console.log(event.target);
-  render();
+  render(tasks);
 });
 
 function toggleTask(id) {
@@ -161,10 +163,43 @@ function deleteTask(id) {
   console.log("dd", id);
   tasks = tasks.filter(task => task.id != id);
   taskId--;
+  activeTasks();
 }
 
-render();
 
+filterTasks.addEventListener("click", (event) => {
+  const eventId = event.target.id;
+  displayFilterTasks(eventId);
+});
+
+function displayFilterTasks(eventId) {
+  let filteredTasks;
+  if(eventId == "show-all") {
+    filteredTasks = tasks;
+  } else if(eventId == "show-active") {
+    console.log("2");
+    filteredTasks = tasks.filter(task => {
+      return !task.completed;
+    });
+    
+  } else if(eventId == "show-completed") {
+    console.log("3");
+    filteredTasks = tasks.filter(task => {
+      return task.completed;
+    });
+  }
+  render(filteredTasks)
+}
+
+function activeTasks() {
+  const count = tasks.filter(task => {
+    return !task.completed;
+  }).length;
+  activeTaskCountDisplay.textContent = `${count} tasks remaining`;
+}
+
+
+render(tasks);
 
 
 
