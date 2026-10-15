@@ -49,7 +49,11 @@ let tasks = [
     completed: false
   }
 ];
+let savedTasks = localStorage.getItem("taskItems");
+tasks = savedTasks ? JSON.parse(savedTasks) : tasks;
 let taskId = tasks.length + 1;
+localStorage.setItem("taskItems", JSON.stringify(tasks));
+
 
 const taskForm = document.querySelector("#task-form");
 const taskTitle = document.querySelector("#title");
@@ -86,8 +90,10 @@ function addDeleteBtn(obj) {
   return deleteBtn;
 }
 
-function render(tasks) {
+function render() {
   showTasks.replaceChildren();
+  tasks = JSON.parse(localStorage.getItem("taskItems"));
+  console.log(tasks);
   if(tasks.length === 0) {
     emptyList.textContent = "List is empty";
   }
@@ -122,7 +128,7 @@ taskForm.addEventListener("submit", (e) => {
   } 
 
   addTask(title);
-  render(tasks);
+  render();
 });
 
 
@@ -134,6 +140,7 @@ function addTask(title) {
   }
   taskId++;
   tasks.push(newTask);
+  localStorage.setItem("taskItems", JSON.stringify(tasks));
 } 
 
 showTasks.addEventListener("click", (event) => {
@@ -145,7 +152,8 @@ showTasks.addEventListener("click", (event) => {
     deleteTask(clickEventId);
   }
   console.log(event.target);
-  render(tasks);
+  localStorage.setItem("taskItems", JSON.stringify(tasks));
+  render();
 });
 
 function toggleTask(id) {
@@ -163,7 +171,6 @@ function deleteTask(id) {
   console.log("dd", id);
   tasks = tasks.filter(task => task.id != id);
   taskId--;
-  activeTasks();
 }
 
 
@@ -187,8 +194,19 @@ function displayFilterTasks(eventId) {
     filteredTasks = tasks.filter(task => {
       return task.completed;
     });
+  } else {
+    return;
   }
-  render(filteredTasks)
+  const originalTasks = localStorage.getItem("taskItems");
+  
+  localStorage.setItem("taskItems", JSON.stringify(filteredTasks));
+
+  render();
+
+  localStorage.setItem("taskItems", originalTasks);
+  tasks = JSON.parse(originalTasks);
+  activeTasks();
+
 }
 
 function activeTasks() {
@@ -198,9 +216,7 @@ function activeTasks() {
   activeTaskCountDisplay.textContent = `${count} tasks remaining`;
 }
 
-
-render(tasks);
-
+render();
 
 
 
