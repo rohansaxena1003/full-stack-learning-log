@@ -51,8 +51,9 @@ let tasks = [
 ];
 let savedTasks = localStorage.getItem("taskItems");
 tasks = savedTasks ? JSON.parse(savedTasks) : tasks;
-let taskId = tasks.length + 1;
+let taskId = localStorage.getItem("taskIdCounter") ? JSON.parse(localStorage.getItem("taskIdCounter")) : tasks.length + 1;
 localStorage.setItem("taskItems", JSON.stringify(tasks));
+localStorage.setItem("taskIdCounter", JSON.stringify(taskId)); 
 
 
 const taskForm = document.querySelector("#task-form");
@@ -93,6 +94,7 @@ function addDeleteBtn(obj) {
 function render() {
   showTasks.replaceChildren();
   tasks = JSON.parse(localStorage.getItem("taskItems"));
+  // taskId = 1 + Number(JSON.parse(localStorage.getItem("taskIdCounter")));
   console.log(tasks);
   if(tasks.length === 0) {
     emptyList.textContent = "List is empty";
@@ -141,6 +143,7 @@ function addTask(title) {
   taskId++;
   tasks.push(newTask);
   localStorage.setItem("taskItems", JSON.stringify(tasks));
+  localStorage.setItem("taskIdCounter", taskId);
 } 
 
 showTasks.addEventListener("click", (event) => {
@@ -170,7 +173,6 @@ function toggleTask(id) {
 function deleteTask(id) {
   console.log("dd", id);
   tasks = tasks.filter(task => task.id != id);
-  taskId--;
 }
 
 
@@ -205,6 +207,7 @@ function displayFilterTasks(eventId) {
 
   localStorage.setItem("taskItems", originalTasks);
   tasks = JSON.parse(originalTasks);
+  taskId = tasks.length + 1;
   activeTasks();
 
 }
