@@ -115,3 +115,8 @@ const safeAsyncOperation = new Promise((resolve, reject) => {
 safeAsyncOperation
   .then((data) => console.log("Success:", data))
   .catch((err) => console.log("Safely caught unexpected async error:", err.message));
+
+
+
+
+  
